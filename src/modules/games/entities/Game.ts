@@ -3,11 +3,13 @@ import {
   CreateDateColumn,
   Entity,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { User } from '../../users/entities/User';
+import Genre from './Genre';
 
 @Entity('games')
 export class Game {
@@ -19,6 +21,9 @@ export class Game {
 
   @ManyToMany(() => User, (user) => user.games)
   users: User[];
+
+  @OneToMany(() => Genre, (genre) => genre.name)
+  genres: Genre[];
 
   @CreateDateColumn()
   created_at: Date;
